@@ -67,4 +67,3 @@ int multipli(int v[N],int primo1,int primo2,int posto1,int posto2)
         return 1;
     return 0;
 }
-//ok
