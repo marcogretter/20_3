@@ -5,7 +5,8 @@
 #define N 20
 
 int numeriPrimi(int n);
-int multipli(int v[N]);
+int multipli(int v[N],int primo1,int primo2,int posto1,int posto2);
+int verifica(int v[N]);
 
 int main(){
     int v[N];
@@ -15,10 +16,14 @@ int main(){
         printf("Inserisci numeri dell'array:\n");
         scanf("%d",&v[i]);
     }
+    if(verifica(v))
+        printf("OK\n");
+    else
+        printf("NON OK\n");
     
     return 0;
 }
-int multipli(int v[N])
+int verifica(int v[N])
 {
     int i,temp=-1,cont=0,cont1=0;
     for (i=0; i<N; i++) {
@@ -29,7 +34,7 @@ int multipli(int v[N])
                 temp=i;
             }
             if(temp!=-1&&cont!=1){
-                if(i-temp==3){
+                if(i-temp==4&&multipli(v, v[temp], v[i],i-4,i)){
                     temp=i;
                     cont1++;
                 }
@@ -40,8 +45,6 @@ int multipli(int v[N])
         return 1;
     return 0;
 }
-
-
 int numeriPrimi(int n)
 {
     int i,cont=0;
@@ -50,6 +53,17 @@ int numeriPrimi(int n)
             cont++;
     }
     if(cont==1)
+        return 1;
+    return 0;
+}
+int multipli(int v[N],int primo1,int primo2,int posto1,int posto2)
+{
+    int i,cont=0;
+    for (i=posto1+1; i<posto2; i++) {
+        if(primo1%v[i]==0&&primo2%v[i]==0)
+            cont++;
+    }
+    if(cont==2)
         return 1;
     return 0;
 }
